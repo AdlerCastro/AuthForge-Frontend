@@ -1,36 +1,157 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🖥️ AuthForge - Frontend
 
-## Getting Started
+Interface web do sistema **AuthForge**, responsável pela autenticação de usuários, gerenciamento de perfis e consumo da API REST. Este projeto foi desenvolvido com **Next.js 15 (App Router)**, integrando autenticação via **JWT**, estilização com **Tailwind CSS**, e consumo de dados com **React Query (TanStack)**.
 
-First, run the development server:
+🔗 API Backend disponível em:  
+👉 [AuthForge Backend Repository](https://github.com/AdlerCastro/AuthForge.git)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 📦 Tecnologias Utilizadas
+
+- **Next.js 15** – Framework React com suporte a App Router
+- **TypeScript** – Tipagem estática
+- **Tailwind CSS** – Estilização utilitária
+- **React Query (TanStack)** – Cache e controle de estados assíncronos
+- **Axios** – Cliente HTTP para requisições à API
+- **JWT** – Autenticação baseada em token
+- **ESLint + Prettier** – Padronização de código
+- **CI/CD** – Integração contínua com GitHub Actions
+
+---
+
+## ⚙️ Funcionalidades
+
+- Tela de login integrada com a API `/sign-in`
+- Formulário de cadastro com validações
+- Área autenticada com proteção de rota (guard)
+- Atualização de dados pessoais (`/me`)
+- Dashboard com informações do usuário
+- Controle de permissões baseado em cargo (`admin` ou `user`)
+
+---
+
+## 📜 Scripts
+
+```json
+"scripts": {
+  "dev": "next dev --turbopack",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "format": "prettier --check --ignore-path .gitignore .",
+  "format:fix": "prettier --write --ignore-path .gitignore ."
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Rodando Localmente
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Instale as dependências
+pnpm install
 
-## Learn More
+# Execute o projeto em modo de desenvolvimento
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+> O frontend se conecta por padrão à URL da API `http://localhost:3333`. Verifique suas variáveis `.env`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧪 Integração Contínua
 
-## Deploy on Vercel
+Este repositório utiliza **GitHub Actions** para validar a qualidade do código a cada push ou PR:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Verificação de formatação (`Prettier`)
+- Lint com ESLint
+- Build da aplicação
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Arquivo: `.github/workflows/ci.yml`
+
+```yaml
+name: Frontend CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Check formatting
+        run: pnpm run format
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Build
+        run: pnpm run build
+```
+
+---
+
+## 📁 Estrutura de Pastas
+
+```
+authforge-frontend/
+├── app/                # Estrutura App Router (Next.js 15)
+├── components/         # Componentes reutilizáveis
+├── hooks/              # Hooks personalizados (ex: useAuth)
+├── services/           # Axios + React Query
+├── styles/             # Tailwind config e globals
+├── public/             # Assets estáticos
+├── .env.example        # Variáveis de ambiente
+```
+
+---
+
+## ✅ Requisitos
+
+- Node.js `>= 18.18.0`
+- PNPM `>= 9.6.0`
+- API Backend rodando em `http://localhost:3333`
+
+---
+
+## 📜 Autoria
+
+Este projeto foi idealizado e desenvolvido por **Adler Castro**. Todos os direitos reservados.
+```
+
+---
+
+Se quiser, posso te gerar também:
+- `.env.example` para o frontend com a URL da API
+- `axiosInstance.ts` configurado com JWT via localStorage
+- Skeleton de componentes (ex: LoginForm, ProtectedRoute)
+
+> Desenvolvido por Adler Castro 🧠🚀
