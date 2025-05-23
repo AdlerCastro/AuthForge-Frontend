@@ -10,19 +10,19 @@ export async function getSessionUser(): Promise<UserResponse> {
     cache: 'no-store',
   });
 
-  const data = await res.json();
+  const result = await res.json();
 
   if (res.status === 401) {
     return {
       data: null,
       success: false,
-      message: `User not found. Please log in again. Status code: ${res.status} - ${data.message} `,
+      message: `User not found. Please log in again. Status code: ${res.status} - ${result.message} `,
     };
   }
 
   if (res.status === 200) {
     return {
-      data,
+      data: result.data,
       success: true,
       message: 'Session user fetched successfully',
     };
