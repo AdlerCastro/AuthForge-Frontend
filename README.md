@@ -146,14 +146,6 @@ authforge-frontend/
 
 Este projeto foi idealizado e desenvolvido por **Adler Castro**. Todos os direitos reservados.
 
-```
-
 ---
 
-Se quiser, posso te gerar também:
-- `.env.example` para o frontend com a URL da API
-- `axiosInstance.ts` configurado com JWT via localStorage
-- Skeleton de componentes (ex: LoginForm, ProtectedRoute)
-
 > Desenvolvido por Adler Castro 🧠🚀
-```
