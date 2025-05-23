@@ -1,21 +1,26 @@
-import { getSessionUser } from '@/actions/getSessionUser.actions';
+import { getSessionUser } from '@/service/getSessionUser.actions';
 import { useQuery } from '@tanstack/react-query';
+import { UserResponse } from '@/types/responseUser.type';
 
-export function useSession() {
+export function useSession(): {
+  session: UserResponse | undefined;
+  isLoading: boolean;
+  isError: boolean;
+  refetch: () => void;
+} {
   const {
-    data: user,
+    data: session,
     isLoading,
     isError,
     refetch,
-  } = useQuery({
+  } = useQuery<UserResponse>({
     queryKey: ['session'],
     queryFn: getSessionUser,
     retry: false,
   });
 
   return {
-    user,
-    isAuthenticated: !!user,
+    session,
     isLoading,
     isError,
     refetch,
