@@ -13,6 +13,8 @@ const toasterVariants = cva('toaster font-inter', {
         'bg-purple-600 flex text-sm items-center w-full h-fit gap-3.75 justify-between rounded-[0.5rem] p-3.5 text-white shadow-xl shadow-black/30',
       error:
         'bg-[#D32F2F] text-sm items-center flex w-full h-fit gap-3.75 justify-between rounded-[0.5rem] p-3.5 text-white shadow-xl shadow-black/30',
+      loading:
+        'bg-yellow-500 text-sm items-center flex w-full h-fit gap-3.75 justify-between rounded-[0.5rem] p-3.5 text-white shadow-xl shadow-black/30',
     },
   },
   defaultVariants: {
@@ -20,7 +22,7 @@ const toasterVariants = cva('toaster font-inter', {
   },
 });
 
-type ToasterVariants = 'success' | 'error';
+type ToasterVariants = 'success' | 'error' | 'loading';
 
 export interface ToasterCustomProps
   extends ToasterProps,
