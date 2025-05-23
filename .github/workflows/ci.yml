@@ -12,17 +12,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: .ENV
     strategy:
       matrix:
         node-version: [22]
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9
-      - name: Use Node.js ${{matrix.node-version}}
+
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -39,3 +42,6 @@ jobs:
 
       - name: Run build
         run: pnpm build
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          NEXT_PUBLIC_API_MID_URL: ${{ secrets.NEXT_PUBLIC_API_MID_URL }}
