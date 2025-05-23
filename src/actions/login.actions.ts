@@ -1,16 +1,12 @@
 import { LoginSchemaType } from '@/schemas/login.schema';
 import { apiClient } from '@/service/apiClient.service';
-
-interface LoginResponse {
-  success: boolean;
-  message: string;
-}
+import { ResponseType } from '@/types/response.type';
 
 export async function postLogin({
   data,
 }: {
   data: LoginSchemaType;
-}): Promise<LoginResponse> {
+}): Promise<ResponseType> {
   try {
     const response = await apiClient.post('/login', data);
 

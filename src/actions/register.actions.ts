@@ -2,10 +2,9 @@
 
 import { RegisterSchemaType, registerSchema } from '@/schemas/register.schema';
 import { env } from '@/config/env.config';
+import { ResponseType } from '@/types/response.type';
 
-interface RegisterResponse {
-  success: boolean;
-  message: string;
+interface RegisterResponse extends ResponseType {
   error?: string;
 }
 
