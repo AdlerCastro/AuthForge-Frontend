@@ -1,9 +1,5 @@
 import z from 'zod';
 
-console.log('🔍 API_URL:', process.env.API_URL);
-console.log('🔍 NEXT_PUBLIC_API_MID_URL:', process.env.NEXT_PUBLIC_API_MID_URL);
-console.log('🔍 NODE_ENV:', process.env.NODE_ENV);
-
 const envSchema = z.object({
   API_URL: z.string().url({ message: 'API_URL inválida' }),
   NEXT_PUBLIC_API_MID_URL: z.string().url({ message: 'MID URL inválida' }),
