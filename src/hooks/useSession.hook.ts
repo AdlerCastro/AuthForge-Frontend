@@ -1,4 +1,4 @@
-import { getSessionUser } from '@/service/getSessionUser.actions';
+import { getSessionUser } from '@/actions/getSession.actions';
 import { useQuery } from '@tanstack/react-query';
 import { UserResponse } from '@/types/responseUser.type';
 
