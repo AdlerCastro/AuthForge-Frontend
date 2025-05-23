@@ -80,6 +80,11 @@ export default function FormsLogin() {
                   placeholder='Ex: johndoe@example.com'
                   {...field}
                   className='text-black'
+                  value={field.value}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    form.clearErrors('email');
+                  }}
                 />
               </FormControl>
               <FormMessage />
@@ -93,7 +98,16 @@ export default function FormsLogin() {
             <FormItem className='flex w-fit flex-col'>
               <FormLabel>Password</FormLabel>
               <FormControl className='w-full'>
-                <Input type='password' placeholder='Ex: abc123' {...field} />
+                <Input
+                  type='password'
+                  placeholder='Ex: abc123'
+                  {...field}
+                  value={field.value}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    form.clearErrors('password');
+                  }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -101,8 +115,8 @@ export default function FormsLogin() {
         />
         <Button
           type='submit'
-          className='w-full max-w-60 self-center'
-          disabled={loading}
+          className='w-full max-w-60 cursor-auto self-center'
+          disabled={loading || !form.formState.isValid}
           variant={loading ? 'loading' : 'default'}
         >
           {loading ? <Loader className='h-5 w-5 animate-spin' /> : 'submit'}
