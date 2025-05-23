@@ -145,6 +145,7 @@ authforge-frontend/
 ## 📜 Autoria
 
 Este projeto foi idealizado e desenvolvido por **Adler Castro**. Todos os direitos reservados.
+
 ```
 
 ---
@@ -155,3 +156,4 @@ Se quiser, posso te gerar também:
 - Skeleton de componentes (ex: LoginForm, ProtectedRoute)
 
 > Desenvolvido por Adler Castro 🧠🚀
+```
