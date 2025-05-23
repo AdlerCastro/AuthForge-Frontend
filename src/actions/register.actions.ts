@@ -16,6 +16,8 @@ export async function postRegister({
   try {
     // Validação local
     const validatedData = registerSchema.parse(data);
+
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...rest } = validatedData;
 
     // Formata nascimento como ISO
@@ -46,6 +48,7 @@ export async function postRegister({
       success: true,
       message: result.message || 'Registro realizado com sucesso',
     };
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return {
       success: false,

@@ -31,7 +31,7 @@ export async function GET() {
     return NextResponse.json(
       {
         success: false,
-        message: 'Erro ao buscar dados do usuário',
+        message: `Erro ao buscar dados do usuário. ${error}`,
       },
       { status: 500 },
     );
