@@ -1,6 +1,6 @@
 import { Role } from '@/enum/role.enum';
 
-export type SessionUser = {
+export type User = {
   id: string;
   name: string;
   email: string;
