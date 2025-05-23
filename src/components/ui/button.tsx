@@ -11,6 +11,8 @@ const buttonVariants = cva(
       variant: {
         default:
           'rounded-4xl bg-purple-600 font-normal text-white transition-all hover:bg-purple-700 focus-visible:outline-white active:bg-purple-800 disabled:bg-purple-600/60',
+        loading:
+          'rounded-4xl w-full bg-purple-600 font-normal text-white transition-all hover:bg-purple-700 focus-visible:outline-white active:bg-purple-800 disabled:bg-purple-600/60',
         outline:
           'rounded-4xl bg-white font-normal text-purple-700 transition-all hover:bg-[#e6e6e6] hover:outline-3 focus-visible:outline-purple-700 active:bg-[#bfbfbf] disabled:bg-purple-600/60',
         link: 'text-primary underline-offset-4 hover:underline',
