@@ -3,6 +3,7 @@
 import { cookies } from 'next/headers';
 import { env } from '@/config/env.config';
 import { UserResponse } from '@/types/responseUser.type';
+import { api } from '@/service/api.service';
 
 export async function getSessionUser(): Promise<UserResponse> {
   try {
@@ -16,19 +17,17 @@ export async function getSessionUser(): Promise<UserResponse> {
       };
     }
 
-    const res = await fetch(`${env.API_URL}/me`, {
-      method: 'GET',
+    const res = await api.get('/me', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      cache: 'no-store',
     });
 
-    const data = await res.json();
+    const data = res.data;
 
     return {
       success: res.status === 200,
-      message: data.message || 'Sessão obtida com sucesso',
+      message: data.data.message || 'Sessão obtida com sucesso',
       data: res.status === 200 ? data.data : null,
     };
   } catch (error) {
