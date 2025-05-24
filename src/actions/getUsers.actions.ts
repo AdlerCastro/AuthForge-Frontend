@@ -12,7 +12,7 @@ export async function getUsers(): Promise<UserListResponse> {
       return {
         success: false,
         message: 'Token de autenticação não encontrado',
-        data: null,
+        data: [],
       };
     }
 
@@ -33,7 +33,7 @@ export async function getUsers(): Promise<UserListResponse> {
     return {
       success: false,
       message: `Erro ao buscar os usuários. ${String(error)}`,
-      data: null,
+      data: [],
     };
   }
 }

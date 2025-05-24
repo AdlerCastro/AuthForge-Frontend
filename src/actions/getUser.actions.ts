@@ -3,6 +3,7 @@
 import { cookies } from 'next/headers';
 import { UserResponse } from '@/types/responseUser.type';
 import { api } from '@/service/api.service';
+import { User } from '@/types/user.type';
 
 export async function getUser(id: string): Promise<UserResponse> {
   try {
@@ -12,7 +13,7 @@ export async function getUser(id: string): Promise<UserResponse> {
       return {
         success: false,
         message: 'Token de autenticação não encontrado',
-        data: null,
+        data: {} as User,
       };
     }
 
@@ -33,7 +34,7 @@ export async function getUser(id: string): Promise<UserResponse> {
     return {
       success: false,
       message: `Erro ao buscar o usuário. ${String(error)}`,
-      data: null,
+      data: {} as User,
     };
   }
 }
