@@ -14,7 +14,6 @@ import { Link } from './link';
 import { Pages } from '@/enum/pages.enum';
 import { logout } from '@/actions/logout.actions';
 import { Toast } from './toast';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const ButtonProfile = () => {
