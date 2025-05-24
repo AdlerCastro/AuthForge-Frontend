@@ -13,7 +13,7 @@ export default function AuthLayout({
   return (
     <QueryClientProvider client={queryClient}>
       <Header />
-      <main className='bg-primary_100 flex min-h-screen w-full justify-center'>
+      <main className='bg-primary_100 flex min-h-screen w-full justify-center pt-20'>
         {children}
       </main>
     </QueryClientProvider>
