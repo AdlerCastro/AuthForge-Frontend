@@ -1,7 +1,6 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { env } from '@/config/env.config';
 import { UserResponse } from '@/types/responseUser.type';
 import { api } from '@/service/api.service';
 
