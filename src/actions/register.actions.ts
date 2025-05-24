@@ -1,8 +1,8 @@
 'use server';
 
 import { RegisterSchemaType, registerSchema } from '@/schemas/register.schema';
-import { env } from '@/config/env.config';
 import { ResponseType } from '@/types/response.type';
+import { api } from '@/service/api.service';
 
 interface RegisterResponse extends ResponseType {
   error?: string;
@@ -26,27 +26,23 @@ export async function postRegister({
       birth_date: new Date(rest.birth_date).toISOString(),
     };
 
-    const response = await fetch(`${env.API_URL}/register`, {
-      method: 'POST',
+    const response = await api.post('/register', safePayload, {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(safePayload),
     });
 
-    const result = await response.json();
-
-    if (!response.ok) {
+    if (!response.data.success) {
       return {
         success: false,
-        message: result.message || 'Erro ao registrar usuário',
-        error: result.error,
+        message: response.data.message || 'Erro ao registrar usuário',
+        error: response.data.error,
       };
     }
 
     return {
       success: true,
-      message: result.message || 'Registro realizado com sucesso',
+      message: response.data.message || 'Registro realizado com sucesso',
     };
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {

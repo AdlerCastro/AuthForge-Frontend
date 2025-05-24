@@ -1,7 +1,12 @@
 import { User } from './user.type';
 
 export interface UserResponse {
-  data: User | null;
+  data: User;
+  success: boolean;
+  message: string;
+}
+export interface UserListResponse {
+  data: User[];
   success: boolean;
   message: string;
 }

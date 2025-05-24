@@ -5,7 +5,7 @@ import { UserResponse } from '@/types/responseUser.type';
 import { api } from '@/service/api.service';
 import { User } from '@/types/user.type';
 
-export async function getSessionUser(): Promise<UserResponse> {
+export async function getUser(id: string): Promise<UserResponse> {
   try {
     const token = (await cookies()).get('access_token')?.value;
 
@@ -17,7 +17,7 @@ export async function getSessionUser(): Promise<UserResponse> {
       };
     }
 
-    const res = await api.get('/me', {
+    const res = await api.get(`/users/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -26,14 +26,14 @@ export async function getSessionUser(): Promise<UserResponse> {
     const data = res.data;
 
     return {
-      success: res.status === 200,
-      message: data.data.message || 'Sessão obtida com sucesso',
-      data: res.status === 200 ? data.data : ({} as User),
+      success: data.success,
+      message: data.message || 'Usuário obtido com sucesso',
+      data: data,
     };
   } catch (error) {
     return {
       success: false,
-      message: `Erro ao buscar dados da sessão. ${String(error)}`,
+      message: `Erro ao buscar o usuário. ${String(error)}`,
       data: {} as User,
     };
   }

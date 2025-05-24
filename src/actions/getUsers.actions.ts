@@ -1,11 +1,10 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { UserResponse } from '@/types/responseUser.type';
+import { UserListResponse } from '@/types/responseUser.type';
 import { api } from '@/service/api.service';
-import { User } from '@/types/user.type';
 
-export async function getSessionUser(): Promise<UserResponse> {
+export async function getUsers(): Promise<UserListResponse> {
   try {
     const token = (await cookies()).get('access_token')?.value;
 
@@ -13,11 +12,11 @@ export async function getSessionUser(): Promise<UserResponse> {
       return {
         success: false,
         message: 'Token de autenticação não encontrado',
-        data: {} as User,
+        data: [],
       };
     }
 
-    const res = await api.get('/me', {
+    const res = await api.get('/users', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -26,15 +25,15 @@ export async function getSessionUser(): Promise<UserResponse> {
     const data = res.data;
 
     return {
-      success: res.status === 200,
-      message: data.data.message || 'Sessão obtida com sucesso',
-      data: res.status === 200 ? data.data : ({} as User),
+      success: data.success,
+      message: data.message || 'Usuários obtidos com sucesso',
+      data: data,
     };
   } catch (error) {
     return {
       success: false,
-      message: `Erro ao buscar dados da sessão. ${String(error)}`,
-      data: {} as User,
+      message: `Erro ao buscar os usuários. ${String(error)}`,
+      data: [],
     };
   }
 }

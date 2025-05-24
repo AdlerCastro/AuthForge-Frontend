@@ -48,55 +48,32 @@
   --font-inter: var(--font-inter);
 
   /* Colors */
-  --color-primary-100: var(--color-primary_100);
-  --color-primary-200: var(--color-primary_200);
-  --color-primary-300: var(--color-primary_300);
-  --color-primary-400: var(--color-primary_400);
-  --color-primary-500: var(--color-primary_500);
-  --color-primary-600: var(--color-primary_600);
-  --color-primary-700: var(--color-primary_700);
-  --color-secondary-100: var(--color-secondary_100);
-  --color-secondary-200: var(--color-secondary_200);
-  --color-secondary-300: var(--color-secondary_300);
-  --color-secondary-400: var(--color-secondary_400);
-  --color-secondary-500: var(--color-secondary_500);
-  --color-secondary-600: var(--color-secondary_600);
-  --color-secondary-700: var(--color-secondary_700);
-  --color-tertiary-100: var(--color-tertiary_100);
-  --color-tertiary-200: var(--color-tertiary_200);
-  --color-tertiary-300: var(--color-tertiary_300);
-  --color-tertiary-400: var(--color-tertiary_400);
-  --color-tertiary-500: var(--color-tertiary_500);
-  --color-tertiary-600: var(--color-tertiary_600);
-  --color-tertiary-700: var(--color-tertiary_700);
-  --color-quaternary-100: var(--color-quaternary_100);
-  --color-quaternary-200: var(--color-quaternary_200);
-  --color-quaternary-300: var(--color-quaternary_300);
-  --color-quaternary-400: var(--color-quaternary_400);
-  --color-quaternary-500: var(--color-quaternary_500);
-  --color-quaternary-600: var(--color-quaternary_600);
-  --color-quaternary-700: var(--color-quaternary_700);
-  --color-quinary-100: var(--color-quinary_100);
-  --color-quinary-200: var(--color-quinary_200);
-  --color-quinary-300: var(--color-quinary_300);
-  --color-quinary-400: var(--color-quinary_400);
-  --color-quinary-500: var(--color-quinary_500);
-  --color-quinary-600: var(--color-quinary_600);
-  --color-quinary-700: var(--color-quinary_700);
-  --color-senary-100: var(--color-senary_100);
-  --color-senary-200: var(--color-senary_200);
-  --color-senary-300: var(--color-senary_300);
-  --color-senary-400: var(--color-senary_400);
-  --color-senary-500: var(--color-senary_500);
-  --color-senary-600: var(--color-senary_600);
-  --color-senary-700: var(--color-senary_700);
-  --color-septenary-100: var(--color-septenary_100);
-  --color-septenary-200: var(--color-septenary_200);
-  --color-septenary-300: var(--color-septenary_300);
-  --color-septenary-400: var(--color-septenary_400);
-  --color-septenary-500: var(--color-septenary_500);
-  --color-septenary-600: var(--color-septenary_600);
-  --color-septenary-700: var(--color-septenary_700);
+  --color-primary_100: var(--color-primary-100);
+  --color-primary_200: var(--color-primary-200);
+  --color-primary_300: var(--color-primary-300);
+  --color-primary_400: var(--color-primary-400);
+  --color-primary_500: var(--color-primary-500);
+  --color-primary_600: var(--color-primary-600);
+  --color-primary_700: var(--color-primary-700);
+  
+  --color-secondary_100: var(--color-secondary-100);
+  --color-secondary_200: var(--color-secondary-200);
+  --color-secondary_300: var(--color-secondary-300);
+  --color-secondary_400: var(--color-secondary-400);
+  --color-secondary_500: var(--color-secondary-500);
+  --color-secondary_600: var(--color-secondary-600);
+  --color-secondary_700: var(--color-secondary-700);
+  
+  --color-tertiary_100: var(--color-tertiary-100);
+  --color-tertiary_200: var(--color-tertiary-200);
+  --color-tertiary_300: var(--color-tertiary-300);
+  --color-tertiary_400: var(--color-tertiary-400);
+  --color-tertiary_500: var(--color-tertiary-500);
+  --color-tertiary_600: var(--color-tertiary-600);
+  --color-tertiary_700: var(--color-tertiary-700);
+
+  /* Box shadow */
+  --shadow-header: var(--shadow-header);
 }
 
 :root {
@@ -104,56 +81,36 @@
   --font-inter: 'Inter', sans-serif;
 
   /* Colors */
-  --color-primary_100: #12f8b7;
-  --color-primary_200: #0dcb96;
-  --color-primary_300: #08a176;
-  --color-primary_400: #047857;
-  --color-primary_500: #02523a;
-  --color-primary_600: #012e1f;
-  --color-primary_700: #00150c;
-  --color-secondary_100: #cffcd6;
-  --color-secondary_200: #66e684;
-  --color-secondary_300: #51bb6a;
-  --color-secondary_400: #3d9151;
-  --color-secondary_500: #2b6a3a;
-  --color-secondary_600: #194523;
-  --color-secondary_700: #09230f;
-  --color-tertiary_100: #5ff1da;
-  --color-tertiary_200: #4dc6b3;
-  --color-tertiary_300: #3b9c8d;
-  --color-tertiary_400: #2a7469;
-  --color-tertiary_500: #1a4f47;
-  --color-tertiary_600: #0b2c27;
-  --color-tertiary_700: #031411;
-  --color-quaternary_100: #f5f7f6;
-  --color-quaternary_200: #c8d0cc;
-  --color-quaternary_300: #a2a8a5;
-  --color-quaternary_400: #7e8380;
-  --color-quaternary_500: #5b5f5d;
-  --color-quaternary_600: #3b3d3c;
-  --color-quaternary_700: #1d1f1e;
-  --color-quinary_100: #eeeef9;
-  --color-quinary_200: #c1c5e9;
-  --color-quinary_300: #959cda;
-  --color-quinary_400: #6974c9;
-  --color-quinary_500: #4350a6;
-  --color-quinary_600: #29326c;
-  --color-quinary_700: #111637;
-  --color-senary_100: #e9f2f9;
-  --color-senary_200: #b9d7ed;
-  --color-senary_300: #78b3d6;
-  --color-senary_400: #5d8ca8;
-  --color-senary_500: #43677c;
-  --color-senary_600: #2b4453;
-  --color-senary_700: #15242d;
-  --color-septenary_100: #d5ddd9;
-  --color-septenary_200: #aeb5b1;
-  --color-septenary_300: #898e8c;
-  --color-septenary_400: #666a68;
-  --color-septenary_500: #454846;
-  --color-septenary_600: #262827;
-  --color-septenary_700: #101111;
+  --color-primary-100: #f5f7f6;
+  --color-primary-200: #c8d0cc;
+  --color-primary-300: #a2a8a5;
+  --color-primary-400: #7e8380;
+  --color-primary-500: #5b5f5d;
+  --color-primary-600: #3b3d3c;
+  --color-primary-700: #1d1f1e;
 
+  --color-secondary-100: #d5ddd9;
+  --color-secondary-200: #aeb5b1;
+  --color-secondary-300: #898e8c;
+  --color-secondary-400: #666a68;
+  --color-secondary-500: #454846;
+  --color-secondary-600: #262827;
+  --color-secondary-700: #101111;
+
+  --color-tertiary-100: #eeeef9;
+  --color-tertiary-200: #c1c5e9;
+  --color-tertiary-300: #959cda;
+  --color-tertiary-400: #6974c9;
+  --color-tertiary-500: #4350a6;
+  --color-tertiary-600: #29326c;
+  --color-tertiary-700: #111637;
+
+  /* Box shadow */
+  --shadow-header:
+    0px 23px 6px 0px rgba(0, 0, 0, 0), 0px 14px 6px 0px rgba(0, 0, 0, 0.01),
+    0px 8px 5px 0px rgba(0, 0, 0, 0.05), 0px 4px 4px 0px rgba(0, 0, 0, 0.09),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  
   /* Styles for Shadcn */
   --radius: 0.625rem;
   --background: oklch(1 0 0);
