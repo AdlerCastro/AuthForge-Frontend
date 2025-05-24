@@ -1,5 +1,6 @@
 'use client';
 
+import { Header } from '@/components/molecules/header';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export default function AuthLayout({
@@ -11,7 +12,8 @@ export default function AuthLayout({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <main className='flex min-h-screen w-full justify-center'>
+      <Header />
+      <main className='bg-primary_100 flex min-h-screen w-full justify-center'>
         {children}
       </main>
     </QueryClientProvider>
