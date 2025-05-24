@@ -1,7 +1,7 @@
 'use client';
 
-import { DataTable } from '@/app/(auth)/users/dataTable';
-import { getUsersColumns } from '@/app/(auth)/users/users.columns';
+import { DataTable } from '@/app/(auth)/users/components/dataTable';
+import { getUsersColumns } from '@/app/(auth)/users/components/users.columns';
 import { useSession } from '@/hooks/useSession.hook';
 import { UserListResponse } from '@/types/responseUser.type';
 
