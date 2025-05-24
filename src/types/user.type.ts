@@ -8,6 +8,6 @@ export type User = {
   RG: string;
   phone: string;
   address: string;
-  birth_date: string;
-  created_at: string;
+  birth_date: Date;
+  created_at: Date;
 };

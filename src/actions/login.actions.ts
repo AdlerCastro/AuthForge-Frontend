@@ -46,6 +46,7 @@ export async function postLogin({
       success: true,
       message: response.data.message || 'Login realizado com sucesso',
     };
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     const status = error?.response?.status;
     const message =

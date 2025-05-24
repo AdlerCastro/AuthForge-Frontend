@@ -3,7 +3,7 @@ export enum NeedAuth {
   USERS = '/users',
   USER = '/users/[id]',
   PROFILE = '/profile',
-  ADMIN = '/admin',
+  ABOUT = '/about',
 }
 
 export enum NoAuth {
@@ -20,5 +20,5 @@ export enum Pages {
   USERS = '/users',
   USER = '/users/[id]',
   PROFILE = '/profile',
-  ADMIN = '/admin',
+  ABOUT = '/about',
 }
