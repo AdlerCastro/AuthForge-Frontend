@@ -22,11 +22,15 @@ export default function Users() {
           </div>
         )}
 
-        {isError ? (
-          <p className='text-red-500'>Erro ao buscar usuários.</p>
-        ) : (
-          <UsersPage data={data} refetch={refetch} />
-        )}
+        {!isLoading &&
+          (isError ? (
+            <p className='text-red-500'>Erro ao buscar usuários.</p>
+          ) : (
+            <UsersPage
+              data={data ?? { data: [], success: false, message: '' }}
+              refetch={refetch}
+            />
+          ))}
       </Container>
     </div>
   );
