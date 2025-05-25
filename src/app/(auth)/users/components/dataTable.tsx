@@ -33,7 +33,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className='w-full rounded-md border pb-2.25 shadow-lg shadow-black/60'>
+    <div className='h-fit w-full rounded-md border pb-2.25 shadow-lg shadow-black/60'>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
