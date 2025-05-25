@@ -24,7 +24,7 @@ export default function UsersPage({ data, refetch }: UsersPageProps) {
     return <p className='text-red-500'>Erro ao buscar a sessão</p>;
   }
 
-  const columns = getUsersColumns(session.data.role, refetch);
+  const columns = getUsersColumns(session.data, refetch);
 
   return (
     <div className='flex h-full w-full justify-center'>
