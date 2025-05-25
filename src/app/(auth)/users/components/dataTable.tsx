@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { cn } from '@/lib/utils';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -32,14 +33,21 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className='w-full rounded-md border shadow-lg shadow-black/60'>
+    <div className='w-full rounded-md border pb-2.25 shadow-lg shadow-black/60'>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
+                const isActionCol = header.column.id === 'actions';
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead
+                    key={header.id}
+                    className={cn(
+                      isActionCol &&
+                        'bg-primary_100 sticky right-0 text-center shadow-md',
+                    )}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -52,6 +60,7 @@ export function DataTable<TData, TValue>({
             </TableRow>
           ))}
         </TableHeader>
+
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
@@ -59,11 +68,23 @@ export function DataTable<TData, TValue>({
                 key={row.id}
                 data-state={row.getIsSelected() && 'selected'}
               >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
+                {row.getVisibleCells().map((cell) => {
+                  const isActionCol = cell.column.id === 'actions';
+                  return (
+                    <TableCell
+                      key={cell.id}
+                      className={cn(
+                        isActionCol &&
+                          'bg-primary_100 sticky right-0 shadow-md',
+                      )}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </TableCell>
+                  );
+                })}
               </TableRow>
             ))
           ) : (
