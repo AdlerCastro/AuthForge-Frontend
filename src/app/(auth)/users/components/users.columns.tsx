@@ -4,9 +4,11 @@ import { UserSchemaType } from '@/schemas/user.schema';
 import { ColumnDef } from '@tanstack/react-table';
 import { UserActionsCell } from './userActionsCells';
 import { Link } from '@/components/atoms/link';
+import { User } from '@/types/user.type';
+import { Pages } from '@/enum/pages.enum';
 
 export function getUsersColumns(
-  role: 'ADMIN' | 'USER',
+  currentUser: User,
   refetch: () => void,
 ): ColumnDef<UserSchemaType>[] {
   const columns: ColumnDef<UserSchemaType>[] = [
@@ -14,11 +16,18 @@ export function getUsersColumns(
     {
       accessorKey: 'name',
       header: 'Name',
-      cell: ({ row }) => (
-        <Link href={`/users/${row.original.id}`} className='text-sm'>
-          {row.original.name}
-        </Link>
-      ),
+      cell: ({ row }) => {
+        const url =
+          currentUser.id === row.original.id
+            ? Pages.PROFILE
+            : `/users/${row.original.id}`;
+
+        return (
+          <Link href={url} className='text-sm'>
+            {row.original.name}
+          </Link>
+        );
+      },
     },
     { accessorKey: 'email', header: 'Email' },
     { accessorKey: 'role', header: 'Role' },
@@ -30,12 +39,16 @@ export function getUsersColumns(
     },
   ];
 
-  if (role === 'ADMIN') {
+  if (currentUser.role === 'ADMIN') {
     columns.push({
       id: 'actions',
       header: 'Ações',
       cell: ({ row }) => (
-        <UserActionsCell user={row.original} refetch={refetch} />
+        <UserActionsCell
+          currentUser={currentUser}
+          user={row.original}
+          refetch={refetch}
+        />
       ),
     });
   }
