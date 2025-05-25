@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex font-inter text-base items-center justify-center gap-2 whitespace-nowrap cursor-pointer outline-0 focus-visible:outline-3',
+  'inline-flex font-inter text-base items-center justify-center gap-2 whitespace-nowrap duration-100 cursor-pointer outline-0 focus-visible:outline-3',
   {
     variants: {
       variant: {
@@ -17,7 +17,7 @@ const buttonVariants = cva(
           'rounded-4xl bg-white font-normal text-purple-700 transition-all hover:bg-[#e6e6e6] hover:outline-3 focus-visible:outline-purple-700 active:bg-[#bfbfbf] disabled:bg-purple-600/50',
         link: 'text-primary underline-offset-4 hover:underline',
         comeBack:
-          'group rounded-full self-start text-white/60 ring-2 ring-white/60 transition-all hover:ring-white focus-visible:ring-white focus-visible:outline-offset-4 focus-visible:outline-purple-600 active:ring-white/80',
+          'group rounded-full self-start text-black/60 ring-2 ring-black/60 transition-all hover:ring-black focus-visible:ring-black focus-visible:outline-offset-4 focus-visible:outline-purple-600 active:ring-black/80',
       },
       size: {
         default: 'px-5 py-2',

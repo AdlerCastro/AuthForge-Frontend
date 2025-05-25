@@ -8,16 +8,29 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className='flex h-full justify-center'>
-        <p>Carregando informações do usuário...</p>
+      <div className='flex min-h-full w-full flex-col items-center justify-center text-center'>
+        <Container className='gap-4'>
+          <h1 className='mb-2 text-4xl font-bold'>Carregando...</h1>
+          <p className='text-lg italic'>
+            Estamos buscando as informações da sua sessão.
+          </p>
+          <p className='text-muted-foreground text-base italic'>
+            Isso pode levar alguns segundos.
+          </p>
+        </Container>
       </div>
     );
   }
 
-  if (isError || !session || !session.success || !session.data) {
+  if (isError || !session) {
     return (
-      <div className='flex h-full items-center justify-center'>
-        <p className='text-red-500'>Erro ao buscar dados da sessão.</p>
+      <div className='flex h-full w-full flex-col items-center justify-center text-center'>
+        <Container className='gap-4'>
+          <h1 className='mb-2 text-4xl font-bold'>Erro ao carregar sessão</h1>
+          <p className='text-lg italic'>
+            Ocorreu um erro ao carregar a sessão.
+          </p>
+        </Container>
       </div>
     );
   }
@@ -25,7 +38,7 @@ export default function Home() {
   const { name, email, role } = session.data;
 
   return (
-    <div className='flex h-full w-full flex-col items-center justify-center text-center'>
+    <div className='flex min-h-full w-full flex-col items-center justify-center text-center'>
       <Container className='gap-4'>
         <h1 className='mb-2 text-4xl font-bold'>Bem-vindo, {name}</h1>
         <p className='text-lg'>Você está autenticado com sucesso.</p>

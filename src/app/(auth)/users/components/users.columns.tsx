@@ -3,36 +3,57 @@
 import { UserSchemaType } from '@/schemas/user.schema';
 import { ColumnDef } from '@tanstack/react-table';
 import { UserActionsCell } from './userActionsCells';
+import { Link } from '@/components/atoms/link';
+import { User } from '@/types/user.type';
+import { Pages } from '@/enum/pages.enum';
+import { formatPhone } from '@/utils/formatPhone';
 
 export function getUsersColumns(
-  role: 'ADMIN' | 'USER',
+  currentUser: User,
   refetch: () => void,
 ): ColumnDef<UserSchemaType>[] {
   const columns: ColumnDef<UserSchemaType>[] = [
-    { accessorKey: 'name', header: 'Name' },
+    { accessorKey: 'RG', header: 'RG' },
+    {
+      accessorKey: 'name',
+      header: 'Name',
+      cell: ({ row }) => {
+        const url =
+          currentUser.id === row.original.id
+            ? Pages.PROFILE
+            : `/users/${row.original.id}`;
+
+        return (
+          <Link href={url} className='text-sm'>
+            {row.original.name}
+          </Link>
+        );
+      },
+    },
     { accessorKey: 'email', header: 'Email' },
     { accessorKey: 'role', header: 'Role' },
-    { accessorKey: 'RG', header: 'RG' },
-    { accessorKey: 'phone', header: 'Phone' },
-    { accessorKey: 'address', header: 'Address' },
+    {
+      accessorKey: 'phone',
+      header: 'Phone',
+      cell: ({ row }) => formatPhone(row.original.phone),
+    },
     {
       accessorKey: 'birth_date',
       header: 'Birth Date',
       cell: ({ row }) => new Date(row.original.birth_date).toLocaleDateString(),
     },
-    {
-      accessorKey: 'created_at',
-      header: 'Created At',
-      cell: ({ row }) => new Date(row.original.created_at).toLocaleDateString(),
-    },
   ];
 
-  if (role === 'ADMIN') {
+  if (currentUser.role === 'ADMIN') {
     columns.push({
       id: 'actions',
       header: 'Ações',
       cell: ({ row }) => (
-        <UserActionsCell user={row.original} refetch={refetch} />
+        <UserActionsCell
+          currentUser={currentUser}
+          user={row.original}
+          refetch={refetch}
+        />
       ),
     });
   }

@@ -2,25 +2,39 @@
 
 import { Pencil, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
 import { deleteUser } from '@/actions/deleteUser.actions';
 import { Toast } from '@/components/atoms/toast';
 import { UserSchemaType } from '@/schemas/user.schema';
+import { Pages } from '@/enum/pages.enum';
+import { Link } from '@/components/atoms/link';
 
 interface UserActionsCellProps {
+  currentUser: UserSchemaType;
   user: UserSchemaType;
   refetch: () => void;
 }
 
-export function UserActionsCell({ user, refetch }: UserActionsCellProps) {
-  const router = useRouter();
-
-  async function handleEdit() {
-    router.push(`/users/${user.id}`);
-    refetch();
-  }
+export function UserActionsCell({
+  currentUser,
+  user,
+  refetch,
+}: UserActionsCellProps) {
+  const url =
+    currentUser.id === user.id
+      ? `${Pages.PROFILE}/edit`
+      : `/users/${user.id}/edit`;
 
   async function handleDelete() {
+    const isCurrentUser = currentUser.id === user.id;
+
+    if (isCurrentUser) {
+      Toast({
+        description: 'Você não pode deletar seu próprio usuário',
+        variant: 'error',
+      });
+      return;
+    }
+
     Toast({ description: 'Deletando usuário...', variant: 'loading' });
 
     const response = await deleteUser(user.id);
@@ -36,10 +50,11 @@ export function UserActionsCell({ user, refetch }: UserActionsCellProps) {
   }
 
   return (
-    <div className='flex gap-2'>
-      <Button size='icon' variant='outline' onClick={handleEdit}>
+    <div className='right-0 flex w-full justify-center gap-2'>
+      <Link href={url} size={'icon'} variant={'icon'}>
         <Pencil className='h-4 w-4' />
-      </Button>
+      </Link>
+
       <Button size='icon' variant='outline' onClick={handleDelete}>
         <Trash className='h-4 w-4' />
       </Button>

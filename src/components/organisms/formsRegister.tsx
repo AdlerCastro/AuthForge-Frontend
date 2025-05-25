@@ -19,6 +19,7 @@ import { registerSchema, RegisterSchemaType } from '@/schemas/register.schema';
 import { Pages } from '@/enum/pages.enum';
 import { postRegister } from '@/actions/register.actions';
 import { Loader } from 'lucide-react';
+import { formatPhone } from '@/utils/formatPhone';
 
 export default function FormsRegister() {
   const router = useRouter();
@@ -84,6 +85,7 @@ export default function FormsRegister() {
                   <FormLabel>Name</FormLabel>
                   <FormControl className='w-full'>
                     <Input
+                      required
                       type='text'
                       placeholder='Ex: John Doe'
                       {...field}
@@ -102,6 +104,7 @@ export default function FormsRegister() {
                   <FormLabel>Email</FormLabel>
                   <FormControl className='w-full'>
                     <Input
+                      required
                       type='email'
                       placeholder='Ex: johndoe@example.com'
                       {...field}
@@ -120,6 +123,7 @@ export default function FormsRegister() {
                   <FormLabel>Password</FormLabel>
                   <FormControl className='w-full'>
                     <Input
+                      required
                       type='password'
                       placeholder='Ex: abc123'
                       className='min-w-full text-black'
@@ -138,6 +142,7 @@ export default function FormsRegister() {
                   <FormLabel>Confirm your password</FormLabel>
                   <FormControl className='w-full'>
                     <Input
+                      required
                       type='password'
                       placeholder='Ex: abc123'
                       className='min-w-full text-black'
@@ -158,10 +163,15 @@ export default function FormsRegister() {
                   <FormLabel>Phone:</FormLabel>
                   <FormControl className='w-full'>
                     <Input
+                      required
                       type='tel'
                       placeholder='Ex: (11) 91234-5678'
                       className='min-w-full text-black'
                       {...field}
+                      onChange={(e) => {
+                        e.target.value = formatPhone(e.target.value);
+                        field.onChange(e);
+                      }}
                     />
                   </FormControl>
                   <FormMessage />
@@ -176,6 +186,7 @@ export default function FormsRegister() {
                   <FormLabel>RG:</FormLabel>
                   <FormControl className='w-full'>
                     <Input
+                      required
                       type='number'
                       placeholder='Ex: 012345'
                       className='min-w-full text-black'
@@ -194,6 +205,7 @@ export default function FormsRegister() {
                   <FormLabel>Address:</FormLabel>
                   <FormControl className='w-full'>
                     <Input
+                      required
                       type='text'
                       placeholder='Ex: Example Street, 123'
                       className='min-w-full text-black'
@@ -212,6 +224,7 @@ export default function FormsRegister() {
                   <FormLabel>Date of Birth:</FormLabel>
                   <FormControl className='w-full'>
                     <Input
+                      required
                       type='date'
                       placeholder='Ex: 2000-01-01'
                       className='min-w-full text-black'
