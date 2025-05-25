@@ -33,7 +33,7 @@ export default function Users() {
         <Container className='gap-4'>
           <h1 className='mb-2 text-4xl font-bold'>Erro ao carregar sessão</h1>
           <p className='text-lg italic'>
-            Ocorreu um erro ao carregar a sessão. {data?.message}
+            Ocorreu um erro ao carregar a sessão.
           </p>
         </Container>
       </div>
