@@ -3,27 +3,30 @@
 import { UserSchemaType } from '@/schemas/user.schema';
 import { ColumnDef } from '@tanstack/react-table';
 import { UserActionsCell } from './userActionsCells';
+import { Link } from '@/components/atoms/link';
 
 export function getUsersColumns(
   role: 'ADMIN' | 'USER',
   refetch: () => void,
 ): ColumnDef<UserSchemaType>[] {
   const columns: ColumnDef<UserSchemaType>[] = [
-    { accessorKey: 'name', header: 'Name' },
+    { accessorKey: 'RG', header: 'RG' },
+    {
+      accessorKey: 'name',
+      header: 'Name',
+      cell: ({ row }) => (
+        <Link href={`/users/${row.original.id}`} className='text-sm'>
+          {row.original.name}
+        </Link>
+      ),
+    },
     { accessorKey: 'email', header: 'Email' },
     { accessorKey: 'role', header: 'Role' },
-    { accessorKey: 'RG', header: 'RG' },
     { accessorKey: 'phone', header: 'Phone' },
-    { accessorKey: 'address', header: 'Address' },
     {
       accessorKey: 'birth_date',
       header: 'Birth Date',
       cell: ({ row }) => new Date(row.original.birth_date).toLocaleDateString(),
-    },
-    {
-      accessorKey: 'created_at',
-      header: 'Created At',
-      cell: ({ row }) => new Date(row.original.created_at).toLocaleDateString(),
     },
   ];
 
