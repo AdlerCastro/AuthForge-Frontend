@@ -16,7 +16,7 @@ export function UserActionsCell({ user, refetch }: UserActionsCellProps) {
   const router = useRouter();
 
   async function handleEdit() {
-    router.push(`/users/${user.id}`);
+    router.push(`/users/${user.id}/edit`);
     refetch();
   }
 
@@ -36,7 +36,7 @@ export function UserActionsCell({ user, refetch }: UserActionsCellProps) {
   }
 
   return (
-    <div className='flex gap-2'>
+    <div className='right-0 flex gap-2'>
       <Button size='icon' variant='outline' onClick={handleEdit}>
         <Pencil className='h-4 w-4' />
       </Button>
