@@ -25,6 +25,16 @@ export function UserActionsCell({
       : `/users/${user.id}/edit`;
 
   async function handleDelete() {
+    const isCurrentUser = currentUser.id === user.id;
+
+    if (isCurrentUser) {
+      Toast({
+        description: 'Você não pode deletar seu próprio usuário',
+        variant: 'error',
+      });
+      return;
+    }
+
     Toast({ description: 'Deletando usuário...', variant: 'loading' });
 
     const response = await deleteUser(user.id);
