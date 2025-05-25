@@ -6,6 +6,7 @@ import { UserActionsCell } from './userActionsCells';
 import { Link } from '@/components/atoms/link';
 import { User } from '@/types/user.type';
 import { Pages } from '@/enum/pages.enum';
+import { formatPhone } from '@/utils/formatPhone';
 
 export function getUsersColumns(
   currentUser: User,
@@ -31,7 +32,11 @@ export function getUsersColumns(
     },
     { accessorKey: 'email', header: 'Email' },
     { accessorKey: 'role', header: 'Role' },
-    { accessorKey: 'phone', header: 'Phone' },
+    {
+      accessorKey: 'phone',
+      header: 'Phone',
+      cell: ({ row }) => formatPhone(row.original.phone),
+    },
     {
       accessorKey: 'birth_date',
       header: 'Birth Date',
