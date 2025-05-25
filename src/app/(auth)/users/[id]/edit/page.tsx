@@ -1,12 +1,19 @@
 import { getUser } from '@/actions/getUser.actions';
+import { ButtonRouter } from '@/components/atoms/buttonRouter';
 import { Container } from '@/components/atoms/container';
 
-export default async function EditUser({ params }: { params: { id: string } }) {
-  const data = await getUser(params.id);
+export default async function EditUser({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const data = await getUser(id);
 
   return (
     <div className='flex h-full w-full justify-center'>
       <Container>
+        <ButtonRouter variant='previous' />
         <h1 className='text-2xl font-bold'>Página de edição de usuários</h1>
         <p className='text-muted-foreground text-center text-base text-balance italic'>
           A edição de usuários ainda não está implementada. Você pode editar os
