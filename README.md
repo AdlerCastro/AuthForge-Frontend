@@ -1,37 +1,118 @@
 # 🖥️ AuthForge - Frontend
 
-Interface web do sistema **AuthForge**, responsável pela autenticação de usuários, gerenciamento de perfis e consumo da API REST. Este projeto foi desenvolvido com **Next.js 15 (App Router)**, integrando autenticação via **JWT**, estilização com **Tailwind CSS**, e consumo de dados com **React Query (TanStack)**.
+Interface web do sistema **AuthForge**, um gerenciador de autenticação e controle de usuários. Desenvolvido com **Next.js 15 (App Router)**, utiliza Server Actions, React Query e React Table para uma experiência moderna, fluida e com foco em segurança e performance.
 
-🔗 API Backend disponível em:  
-👉 [AuthForge Backend Repository](https://github.com/AdlerCastro/AuthForge.git)
-
----
-
-## 📦 Tecnologias Utilizadas
-
-- **Next.js 15** – Framework React com suporte a App Router
-- **TypeScript** – Tipagem estática
-- **Tailwind CSS** – Estilização utilitária
-- **React Query (TanStack)** – Cache e controle de estados assíncronos
-- **Axios** – Cliente HTTP para requisições à API
-- **JWT** – Autenticação baseada em token
-- **ESLint + Prettier** – Padronização de código
-- **CI/CD** – Integração contínua com GitHub Actions
+🔗 Repositório da API:  
+👉 [AuthForge Backend](https://github.com/AdlerCastro/AuthForge.git)
 
 ---
 
-## ⚙️ Funcionalidades
+## ⚙️ Tecnologias e Padrões Utilizados
 
-- Tela de login integrada com a API `/sign-in`
-- Formulário de cadastro com validações
-- Área autenticada com proteção de rota (guard)
-- Atualização de dados pessoais (`/me`)
-- Dashboard com informações do usuário
-- Controle de permissões baseado em cargo (`admin` ou `user`)
+- **Next.js 15 (App Router)** – Renderização otimizada com suporte a Server Actions
+- **TypeScript** – Segurança e produtividade no desenvolvimento
+- **Tailwind CSS** – Estilização utilitária de alto desempenho
+- **ShadCN UI** – Componentes acessíveis e baseados em Radix UI
+- **React Query (TanStack)** – Controle de estados assíncronos e cache
+- **React Table (TanStack)** – Tabelas reativas e escaláveis
+- **Zod** – Validação de esquemas e tipos
+- **Axios** – Cliente HTTP para comunicação com a API
+- **Lucide React** – Ícones vetoriais personalizáveis
+- **JWT** – Autenticação segura baseada em token
+- **ESLint + Prettier** – Padrão de código consistente e automatizado
 
 ---
 
-## 📜 Scripts
+## 🧱 Padrão de Projeto
+
+O projeto segue o **Atomic Design** e está organizado em:
+
+```bash
+src/
+├── actions/             # Server Actions (autenticação, usuários, etc.)
+├── app/                 # Páginas estruturadas por layout (App Router)
+│   ├── (auth)/          # Áreas protegidas por autenticação
+│   │   ├── home/
+│   │   └── users/
+│   ├── (without-auth)/  # Rotas públicas (login, registro)
+│   ├── layout.tsx       # Layout raiz
+│   └── globals.css      # Estilos globais
+├── components/          # Componentes reutilizáveis (atomic design)
+├── config/              # Configurações globais
+├── enum/                # Enums da aplicação
+├── hooks/               # Custom hooks (ex: useSession)
+├── lib/                 # Funções utilitárias e instâncias
+├── schemas/             # Esquemas de validação Zod
+├── service/             # Instâncias Axios e serviços
+├── types/               # Tipagens compartilhadas
+├── utils/               # Funções auxiliares
+└── middleware.ts        # Middleware de proteção de rotas
+```
+
+---
+
+## 🚀 Funcionalidades
+
+- 🔐 **Autenticação via JWT** com cookies HttpOnly
+- ✅ **Proteção de rotas** via middleware do Next.js (`middleware.ts`)
+- 👥 **Dashboard de usuários** com ações administrativas (editar/deletar)
+- 🔄 **Atualização automática** após ações via React Query
+- 🧠 **Renderização Server-Side** com `server actions`
+- 🧪 Integração contínua com GitHub Actions
+- 🔒 **Controle de permissões**: apenas administradores veem ações
+
+---
+
+## 🧪 CI/CD – GitHub Actions
+
+```yaml
+# .github/workflows/ci.yml
+name: Continuous Integration
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: .ENV
+    strategy:
+      matrix:
+        node-version: [22]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Check formatting
+        run: pnpm run format:fix
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Run build
+        run: pnpm build
+        env:
+          API_URL: ${{ secrets.API_URL }}
+```
+
+---
+
+## 🧪 Scripts disponíveis
 
 ```json
 "scripts": {
@@ -46,106 +127,27 @@ Interface web do sistema **AuthForge**, responsável pela autenticação de usu�
 
 ---
 
-## 🚀 Rodando Localmente
+## ⚡ Como executar localmente
 
 ```bash
-# Instale as dependências
 pnpm install
-
-# Execute o projeto em modo de desenvolvimento
 pnpm dev
 ```
 
-> O frontend se conecta por padrão à URL da API `http://localhost:3333`. Verifique suas variáveis `.env`.
+> Certifique-se de configurar o arquivo `.env` com a variável `API_URL=http://localhost:3333`
 
 ---
 
-## 🧪 Integração Contínua
-
-Este repositório utiliza **GitHub Actions** para validar a qualidade do código a cada push ou PR:
-
-- Verificação de formatação (`Prettier`)
-- Lint com ESLint
-- Build da aplicação
-
-### Arquivo: `.github/workflows/ci.yml`
-
-```yaml
-name: Frontend CI
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-      - develop
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [22]
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Check formatting
-        run: pnpm run format
-
-      - name: Lint
-        run: pnpm run lint
-
-      - name: Build
-        run: pnpm run build
-```
-
----
-
-## 📁 Estrutura de Pastas
-
-```
-authforge-frontend/
-├── app/                # Estrutura App Router (Next.js 15)
-├── components/         # Componentes reutilizáveis
-├── hooks/              # Hooks personalizados (ex: useAuth)
-├── services/           # Axios + React Query
-├── styles/             # Tailwind config e globals
-├── public/             # Assets estáticos
-├── .env.example        # Variáveis de ambiente
-```
-
----
-
-## ✅ Requisitos
+## 🧱 Requisitos
 
 - Node.js `>= 18.18.0`
 - PNPM `>= 9.6.0`
-- API Backend rodando em `http://localhost:3333`
+- Backend rodando localmente em `http://localhost:3333`
 
 ---
 
-## 📜 Autoria
+## 👨‍💻 Desenvolvido por
 
-Este projeto foi idealizado e desenvolvido por **Adler Castro**. Todos os direitos reservados.
-
----
-
-> Desenvolvido por Adler Castro 🧠🚀
+**Adler Castro**  
+Projeto AuthForge — 2025  
+🧠🚀
