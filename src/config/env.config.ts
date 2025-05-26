@@ -2,7 +2,6 @@ import z from 'zod';
 
 const envSchema = z.object({
   API_URL: z.string().url({ message: 'API_URL inválida' }),
-  NEXT_PUBLIC_API_MID_URL: z.string().url({ message: 'MID URL inválida' }),
   NODE_ENV: z
     .enum(['development', 'production', 'test'])
     .default('development'),
