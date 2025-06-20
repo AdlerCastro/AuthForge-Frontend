@@ -17,7 +17,9 @@ export async function editUser(
 
     const safePayload = {
       ...rest,
-      birth_date: new Date(rest.birth_date).toISOString(),
+      birth_date: rest.birth_date
+        ? new Date(rest.birth_date).toISOString()
+        : null,
     };
 
     const token = (await cookies()).get('access_token')?.value;
@@ -28,16 +30,16 @@ export async function editUser(
       },
     });
 
-    if (response.status === 200) {
+    if (response.status !== 200) {
       return {
-        success: true,
-        message: response.data.message || 'Usuário editado com sucesso',
+        success: false,
+        message: `Erro ao editar o usuário. ${response.data.message}`,
       };
     }
 
     return {
-      success: false,
-      message: `Erro ao editar o usuário. ${response.data.message}`,
+      success: true,
+      message: response.data.message || 'Usuário editado com sucesso',
     };
   } catch (error) {
     return {
