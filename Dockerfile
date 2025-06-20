@@ -10,7 +10,7 @@ RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
 
 # Instala dependências com todas as dependências (inclusive dev)
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 # Copia o restante do projeto
 COPY . .
@@ -31,7 +31,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/next.config.js ./next.config.js
+COPY --from=builder /app/next.config.ts ./next.config.ts
 
 # Expor a porta padrão do Next.js SSR
 EXPOSE 3000
