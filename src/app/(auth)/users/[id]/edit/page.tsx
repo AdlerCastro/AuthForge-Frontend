@@ -1,6 +1,7 @@
 import { getUser } from '@/actions/getUser.actions';
 import { ButtonRouter } from '@/components/atoms/buttonRouter';
 import { Container } from '@/components/atoms/container';
+import FormsUpdate from '@/components/organisms/formUpdate';
 
 export default async function EditUser({
   params,
@@ -9,22 +10,15 @@ export default async function EditUser({
 }) {
   const { id } = await params;
   const data = await getUser(id);
+  const user = data.data;
 
   return (
     <div className='flex h-full w-full justify-center'>
       <Container>
         <ButtonRouter variant='previous' />
-        <h1 className='text-2xl font-bold'>Página de edição de usuários</h1>
-        <p className='text-muted-foreground text-center text-base text-balance italic'>
-          A edição de usuários ainda não está implementada. Você pode editar os
-          dados do usuário de forma organizada em breve.
-        </p>
-        <div className='mt-4'>
-          <h2 className='text-lg font-semibold'>Dados do Usuário:</h2>
-          <pre className='whitespace-pre-wrap'>
-            {JSON.stringify(data.data, null, 2)}
-          </pre>
-        </div>
+        <h1 className='text-2xl font-bold'>Edição do usuário: {user.name}</h1>
+
+        <FormsUpdate {...user} />
       </Container>
     </div>
   );
